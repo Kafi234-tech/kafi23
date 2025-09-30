@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Do You Love Me?</title>
+  <style>
+    body {
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #ffe4ec;
+      font-family: Arial, sans-serif;
+    }
+    #page1, #page2 {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    #page1.active, #page2.active {
+      display: flex;
+    }
+
+    /* Stick figure */
+    .stickman {
+      position: relative;
+      width: 100px;
+      height: 200px;
+    }
+    .head {
+      width: 80px;
+      height: 80px;
+      border: 3px solid black;
+      border-radius: 50%;
+      position: absolute;
+      left: 10px;
+      top: 0;
+      background: white;
+    }
+    /* Eyes */
+    .eye {
+      width: 10px;
+      height: 10px;
+      background: black;
+      border-radius: 50%;
+      position: absolute;
+      top: 25px;
+    }
+    .eye.left { left: 20px; }
+    .eye.right { right: 20px; }
+
+    /* Mouth crying */
+    .mouth {
+      width: 40px;
+      height: 20px;
+      border: 3px solid black;
+      border-top: none;
+      border-radius: 0 0 50% 50%;
+      position: absolute;
+      bottom: 20px;
+      left: 18px;
+    }
+
+    /* Tear drops */
+    .tear {
+      width: 6px;
+      height: 12px;
+      background: #00f;
+      border-radius: 50%;
+      position: absolute;
+      top: 45px;
+    }
+    .tear.left { left: 18px; }
+    .tear.right { right: 18px; }
+
+    .body {
+      position: absolute;
+      top: 80px;
+      left: 48px;
+      width: 4px;
+      height: 80px;
+      background: black;
+    }
+    .arm {
+      width: 60px;
+      height: 4px;
+      background: black;
+      position: absolute;
+      top: 100px;
+    }
+    .arm.left { left: -12px; transform: rotate(-30deg); }
+    .arm.right { left: 50px; transform: rotate(30deg); }
+    .leg {
+      width: 4px;
+      height: 60px;
+      background: black;
+      position: absolute;
+      top: 160px;
+    }
+    .leg.left { left: 38px; transform: rotate(20deg); }
+    .leg.right { left: 58px; transform: rotate(-20deg); }
+
+    /* Page 2 style */
+    h1 {
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
+    button {
+      margin: 10px;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 8px;
+      background: #ff4081;
+      color: white;
+      font-size: 18px;
+      cursor: pointer;
+    }
+    #noBtn {
+      position: absolute;
+    }
+    .heart {
+      font-size: 60px;
+      color: red;
+      animation: beat 1s infinite;
+    }
+    @keyframes beat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.3); }
+    }
+
+    /* Footer */
+    .footer {
+      position: fixed;
+      bottom: 10px;
+      font-style: italic;
+      font-size: 14px;
+      opacity: 0;
+      animation: fadeIn 2s ease-in forwards;
+      animation-delay: 2s;
+    }
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Page 1 -->
+  <div id="page1" class="active">
+    <div class="stickman">
+      <div class="head">
+        <div class="eye left"></div>
+        <div class="eye right"></div>
+        <div class="tear left"></div>
+        <div class="tear right"></div>
+        <div class="mouth"></div>
+      </div>
+      <div class="body"></div>
+      <div class="arm left"></div>
+      <div class="arm right"></div>
+      <div class="leg left"></div>
+      <div class="leg right"></div>
+    </div>
+    <button onclick="nextPage()">Next</button>
+  </div>
+
+  <!-- Page 2 -->
+  <div id="page2">
+    <h1>Do You Love Me? 🥺</h1>
+    <div>
+      <button onclick="yesClick()">Yes</button>
+      <button id="noBtn" onmouseover="moveNo()">No</button>
+    </div>
+    <div id="heartMsg" style="display:none;">
+      <div class="heart">❤️</div>
+      <h2>Yay! I know that Good decision  💕</h2>
+    </div>
+  </div>
+
+  <div class="footer">Designed by kafi</div>
+
+  <script>
+    function nextPage() {
+      document.getElementById('page1').classList.remove('active');
+      document.getElementById('page2').classList.add('active');
+    }
+    function moveNo() {
+      const btn = document.getElementById('noBtn');
+      const x = Math.random() * (window.innerWidth - 100);
+      const y = Math.random() * (window.innerHeight - 100);
+      btn.style.left = x + 'px';
+      btn.style.top = y + 'px';
+    }
+    function yesClick() {
+      document.getElementById('heartMsg').style.display = 'block';
+    }
+  </script>
+</body>
+</html>
